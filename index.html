@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Terra Coffee — Kawiarnia w sercu miasta</title>
+<meta name="description" content="Terra Coffee — speciality coffee, świeże wypieki i klimat, do którego się wraca." />
+<style>
+  :root {
+    --bg: #faf6f0;
+    --panel: #fffdf9;
+    --border: #e7ded1;
+    --text: #2b2118;
+    --muted: #8a7a68;
+    --accent: #b07d4f;
+    --dark: #1f1710;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: Georgia, "Segoe UI", serif; background: var(--bg); color: var(--text); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 32px; background: rgba(250,246,240,.9); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-size: 20px; font-weight: 700; letter-spacing: .02em; }
+  .logo span { color: var(--accent); }
+  nav a { color: var(--muted); text-decoration: none; margin-left: 26px; font-size: 15px; font-family: "Segoe UI", sans-serif; transition: .15s; }
+  nav a:hover { color: var(--text); }
+  .hero {
+    min-height: 78vh; display: grid; place-items: center; text-align: center;
+    padding: 80px 24px; position: relative;
+    background:
+      radial-gradient(700px 320px at 50% 100%, rgba(176,125,79,.14), transparent 70%);
+  }
+  .hero h1 { font-size: clamp(40px, 7vw, 72px); letter-spacing: -0.02em; line-height: 1.05; }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero p { color: var(--muted); font-family: "Segoe UI", sans-serif; font-size: 17px; max-width: 520px; margin: 20px auto 32px; }
+  .btn {
+    display: inline-block; background: var(--dark); color: #fff; text-decoration: none;
+    font-family: "Segoe UI", sans-serif; font-size: 14px; font-weight: 600;
+    padding: 14px 30px; border-radius: 999px; transition: .2s;
+  }
+  .btn:hover { background: var(--accent); transform: translateY(-2px); }
+  section { max-width: 1060px; margin: 0 auto; padding: 80px 24px; }
+  .eyebrow { color: var(--accent); font-family: "Segoe UI", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  h2 { font-size: clamp(28px, 4.5vw, 40px); margin: 10px 0 34px; }
+  .menu { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; }
+  .item {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+    padding: 16px 0; border-bottom: 1px dashed var(--border);
+  }
+  .item .name { font-weight: 700; }
+  .item .desc { color: var(--muted); font-family: "Segoe UI", sans-serif; font-size: 13px; margin-top: 3px; }
+  .item .price { font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .ph {
+    aspect-ratio: 1; border-radius: 16px; display: grid; place-items: center; font-size: 44px;
+    background: linear-gradient(135deg, var(--c1), var(--c2)); transition: .25s;
+  }
+  .ph:hover { transform: scale(1.04) rotate(-1deg); }
+  .info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .info .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 26px;
+    font-family: "Segoe UI", sans-serif;
+  }
+  .card h3 { font-size: 15px; margin-bottom: 10px; }
+  .card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+  footer { background: var(--dark); color: #cbb9a5; text-align: center; padding: 44px 24px; font-family: "Segoe UI", sans-serif; font-size: 13px; }
+  footer .logo { color: #fff; font-size: 22px; margin-bottom: 8px; }
+  @media (max-width: 760px) {
+    .menu { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .info { grid-template-columns: 1fr; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Terra<span> Coffee</span></div>
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Speciality coffee · est. 2026</p>
+    <h1>Kawa, która<br /><em>pachnie domem</em>.</h1>
+    <p>Palarnia, wypieki na miejscu i stolik przy oknie z widokiem na rynek. Wpadnij — pierwsze ciastko gratis.</p>
+    <a class="btn" href="#menu">Zobacz menu</a>
+  </div>
+</section>
+
+<section id="menu">
+  <p class="eyebrow">Menu</p>
+  <h2>Nasze specjały</h2>
+  <div class="menu">
+    <div class="item"><div><div class="name">Espresso</div><div class="desc">Klasyczny shot z naszej palarni</div></div><div class="price">9 zł</div></div>
+    <div class="item"><div><div class="name">Flat White</div><div class="desc">Podwójne espresso, aksamitne mleko</div></div><div class="price">14 zł</div></div>
+    <div class="item"><div><div class="name">Pour Over V60</div><div class="desc">Kawa filtrowana, owoce i kwiaty</div></div><div class="price">17 zł</div></div>
+    <div class="item"><div><div class="name">Cold Brew Tonic</div><div class="desc">Orzeźwiający, na kostkach lodu</div></div><div class="price">16 zł</div></div>
+    <div class="item"><div><div class="name">Sernik baskijski</div><div class="desc">Karmelizowany, pieczony co rano</div></div><div class="price">15 zł</div></div>
+    <div class="item"><div><div class="name">Croissant maślany</div><div class="desc">72 warstwy ciasta, francuskie masło</div></div><div class="price">11 zł</div></div>
+  </div>
+</section>
+
+<section id="galeria">
+  <p class="eyebrow">Galeria</p>
+  <h2>Klimat Terry</h2>
+  <div class="gallery">
+    <div class="ph" style="--c1:#e9d9c6;--c2:#d4b896">☕</div>
+    <div class="ph" style="--c1:#d8c3ab;--c2:#b99972">🥐</div>
+    <div class="ph" style="--c1:#c9b193;--c2:#a9885f">🌿</div>
+    <div class="ph" style="--c1:#e4cfc0;--c2:#c9a587">🍰</div>
+    <div class="ph" style="--c1:#dbc4ac;--c2:#bd9a76">📖</div>
+    <div class="ph" style="--c1:#eadac8;--c2:#cfae8a">🪟</div>
+    <div class="ph" style="--c1:#d0b699;--c2:#b08a60">🫘</div>
+    <div class="ph" style="--c1:#e6d3be;--c2:#c4a179">🕯️</div>
+  </div>
+</section>
+
+<section id="kontakt">
+  <p class="eyebrow">Znajdziesz nas</p>
+  <h2>Wpadnij na kawę</h2>
+  <div class="info">
+    <div class="card"><h3>📍 Adres</h3><p>Rynek Główny 12<br />31-000 Kraków</p></div>
+    <div class="card"><h3>🕐 Godziny</h3><p>Pon–Pt: 7:30–19:00<br />Sob–Nd: 9:00–18:00</p></div>
+    <div class="card"><h3>✉️ Kontakt</h3><p>cześć@terracoffee.pl<br />+48 123 456 789</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Terra<span style="color:var(--accent)"> Coffee</span></div>
+  Demonstracyjna strona kawiarni · HTML / CSS / JavaScript
+</footer>
+</body>
+</html>
