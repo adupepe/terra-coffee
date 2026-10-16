@@ -3,140 +3,435 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Terra Coffee — Kawiarnia w sercu miasta</title>
-<meta name="description" content="Terra Coffee — speciality coffee, świeże wypieki i klimat, do którego się wraca." />
+<title>Terra Coffee — Kawiarnia speciality i palarnia w Krakowie</title>
+<meta name="description" content="Terra Coffee — kawa speciality z własnej palarni, rzemieślnicze wypieki i stolik przy oknie na krakowskim Kazimierzu." />
 <style>
   :root {
     --bg: #faf6f0;
     --panel: #fffdf9;
-    --border: #e7ded1;
-    --text: #2b2118;
-    --muted: #8a7a68;
-    --accent: #b07d4f;
-    --dark: #1f1710;
+    --border: #e6dccf;
+    --text: #261c14;
+    --muted: #7d6d5c;
+    --accent: #a86c3d;
+    --dark: #1d150f;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { font-family: Georgia, "Segoe UI", serif; background: var(--bg); color: var(--text); }
+  body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .sans { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; }
+
   header {
-    position: sticky; top: 0; z-index: 10;
+    position: sticky; top: 0; z-index: 30;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 32px; background: rgba(250,246,240,.9); backdrop-filter: blur(10px);
+    padding: 16px 36px; background: rgba(250,246,240,.92); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
-  .logo { font-size: 20px; font-weight: 700; letter-spacing: .02em; }
-  .logo span { color: var(--accent); }
-  nav a { color: var(--muted); text-decoration: none; margin-left: 26px; font-size: 15px; font-family: "Segoe UI", sans-serif; transition: .15s; }
+  .logo { font-size: 22px; font-weight: 700; text-decoration: none; color: var(--text); }
+  .logo span { color: var(--accent); font-style: italic; }
+  nav { display: flex; gap: 26px; align-items: center; font-family: "Segoe UI", sans-serif; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: .15s; }
   nav a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--dark); color: #fff !important; padding: 9px 18px; border-radius: 999px;
+  }
+  .nav-cta:hover { background: var(--accent); }
+
+  /* HERO */
   .hero {
-    min-height: 78vh; display: grid; place-items: center; text-align: center;
-    padding: 80px 24px; position: relative;
-    background:
-      radial-gradient(700px 320px at 50% 100%, rgba(176,125,79,.14), transparent 70%);
+    position: relative; min-height: 82vh; display: grid; place-items: center; text-align: center;
+    color: #fff; padding: 100px 24px; overflow: hidden;
   }
-  .hero h1 { font-size: clamp(40px, 7vw, 72px); letter-spacing: -0.02em; line-height: 1.05; }
-  .hero h1 em { color: var(--accent); font-style: italic; }
-  .hero p { color: var(--muted); font-family: "Segoe UI", sans-serif; font-size: 17px; max-width: 520px; margin: 20px auto 32px; }
+  .hero-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(.48); transform: scale(1.03);
+  }
+  .hero-inner { position: relative; max-width: 720px; }
+  .eyebrow {
+    font-family: "Segoe UI", sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--accent);
+  }
+  .hero .eyebrow { color: #f3c89b; }
+  .hero h1 { font-size: clamp(40px, 6.5vw, 72px); line-height: 1.05; margin: 16px 0 18px; font-weight: 700; }
+  .hero h1 em { color: #f3c89b; font-style: italic; }
+  .hero p { font-family: "Segoe UI", sans-serif; font-size: 17px; color: #ece3d8; max-width: 540px; margin: 0 auto 30px; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; font-family: "Segoe UI", sans-serif; }
   .btn {
-    display: inline-block; background: var(--dark); color: #fff; text-decoration: none;
-    font-family: "Segoe UI", sans-serif; font-size: 14px; font-weight: 600;
-    padding: 14px 30px; border-radius: 999px; transition: .2s;
+    display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+    padding: 14px 28px; border-radius: 999px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: .2s;
   }
-  .btn:hover { background: var(--accent); transform: translateY(-2px); }
-  section { max-width: 1060px; margin: 0 auto; padding: 80px 24px; }
-  .eyebrow { color: var(--accent); font-family: "Segoe UI", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-  h2 { font-size: clamp(28px, 4.5vw, 40px); margin: 10px 0 34px; }
-  .menu { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; }
-  .item {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
-    padding: 16px 0; border-bottom: 1px dashed var(--border);
+  .btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+  .btn-ghost { background: rgba(255,255,255,.14); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.35); }
+
+  section { max-width: 1140px; margin: 0 auto; padding: 84px 24px; }
+  h2 { font-size: clamp(28px, 4vw, 42px); margin: 8px 0 12px; line-height: 1.15; }
+  .lead { font-family: "Segoe UI", sans-serif; color: var(--muted); max-width: 560px; font-size: 15px; }
+
+  /* STORY */
+  .story { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .story-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .story-imgs img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 18px; }
+  .story-imgs img:last-child { margin-top: 28px; }
+  .story p { font-family: "Segoe UI", sans-serif; color: var(--muted); margin-top: 14px; font-size: 15px; }
+  .stats { display: flex; gap: 32px; margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--border); font-family: "Segoe UI", sans-serif; }
+  .stats b { font-size: 26px; color: var(--accent); display: block; font-family: Georgia, serif; }
+  .stats span { font-size: 12px; color: var(--muted); }
+
+  /* MENU */
+  .menu-tabs { display: flex; gap: 10px; margin: 28px 0 30px; flex-wrap: wrap; font-family: "Segoe UI", sans-serif; }
+  .m-tab {
+    border: 1px solid var(--border); background: var(--panel); color: var(--muted);
+    padding: 10px 22px; border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; transition: .15s;
   }
-  .item .name { font-weight: 700; }
-  .item .desc { color: var(--muted); font-family: "Segoe UI", sans-serif; font-size: 13px; margin-top: 3px; }
-  .item .price { font-weight: 700; color: var(--accent); white-space: nowrap; }
-  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .ph {
-    aspect-ratio: 1; border-radius: 16px; display: grid; place-items: center; font-size: 44px;
-    background: linear-gradient(135deg, var(--c1), var(--c2)); transition: .25s;
+  .m-tab.on { background: var(--dark); border-color: var(--dark); color: #fff; }
+  .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .dish {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 18px;
+    overflow: hidden; transition: .22s; display: flex; flex-direction: column;
   }
-  .ph:hover { transform: scale(1.04) rotate(-1deg); }
-  .info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  .info .card {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 26px;
+  .dish:hover { transform: translateY(-4px); box-shadow: 0 20px 36px -22px rgba(38,28,20,.25); }
+  .dish img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+  .dish-b { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
+  .dish-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .dish-top h3 { font-size: 18px; }
+  .dish-top .price { color: var(--accent); font-weight: 700; font-family: "Segoe UI", sans-serif; white-space: nowrap; }
+  .dish p { font-family: "Segoe UI", sans-serif; color: var(--muted); font-size: 13px; margin-top: 6px; }
+  .dish .tag {
+    margin-top: 12px; align-self: flex-start; font-family: "Segoe UI", sans-serif;
+    font-size: 11px; background: #f2e8dc; color: var(--accent); padding: 3px 10px; border-radius: 999px; font-weight: 600;
+  }
+
+  /* GALLERY */
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 32px; }
+  .gallery img {
+    width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 16px;
+    cursor: pointer; transition: transform .3s ease, filter .3s;
+  }
+  .gallery img:hover { transform: scale(1.03); filter: brightness(1.06); }
+
+  /* REVIEWS */
+  .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; font-family: "Segoe UI", sans-serif; }
+  .rev { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 24px; }
+  .rev .stars { color: #d97706; margin-bottom: 10px; }
+  .rev p { font-size: 14px; color: var(--text); margin-bottom: 14px; }
+  .rev b { font-size: 13px; }
+  .rev span { font-size: 12px; color: var(--muted); display: block; }
+
+  /* BOOKING + INFO */
+  .book-wrap {
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 32px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 24px; padding: 40px;
     font-family: "Segoe UI", sans-serif;
   }
-  .card h3 { font-size: 15px; margin-bottom: 10px; }
-  .card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
-  footer { background: var(--dark); color: #cbb9a5; text-align: center; padding: 44px 24px; font-family: "Segoe UI", sans-serif; font-size: 13px; }
-  footer .logo { color: #fff; font-size: 22px; margin-bottom: 8px; }
-  @media (max-width: 760px) {
-    .menu { grid-template-columns: 1fr; }
+  .info-list { display: grid; gap: 18px; margin-top: 20px; }
+  .info-list div b { display: block; font-size: 14px; }
+  .info-list div span { color: var(--muted); font-size: 14px; }
+  form.book { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: start; }
+  form.book .full { grid-column: 1 / -1; }
+  form.book input, form.book select, form.book textarea {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px;
+    font: inherit; font-size: 14px; background: var(--bg); outline: none;
+  }
+  form.book input:focus, form.book textarea:focus { border-color: var(--accent); background: #fff; }
+
+  .lb {
+    position: fixed; inset: 0; background: rgba(15,10,6,.88); z-index: 80;
+    display: none; place-items: center; padding: 24px;
+  }
+  .lb.open { display: grid; }
+  .lb img { max-width: min(860px, 92vw); max-height: 82vh; border-radius: 16px; object-fit: contain; }
+
+  footer {
+    background: var(--dark); color: #cbb9a5; text-align: center; padding: 48px 24px;
+    font-family: "Segoe UI", sans-serif; font-size: 13px;
+  }
+  footer .logo { color: #fff; font-size: 24px; display: block; margin-bottom: 8px; }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 90px);
+    background: var(--dark); color: #fff; padding: 12px 24px; border-radius: 999px;
+    font-family: "Segoe UI", sans-serif; font-size: 14px; transition: transform .3s; z-index: 90;
+  }
+  .toast.show { transform: translate(-50%, 0); }
+
+  @media (max-width: 900px) {
+    .story, .book-wrap { grid-template-columns: 1fr; }
+    .menu-grid, .reviews { grid-template-columns: 1fr 1fr; }
     .gallery { grid-template-columns: repeat(2, 1fr); }
-    .info { grid-template-columns: 1fr; }
-    nav { display: none; }
+    nav a:not(.nav-cta) { display: none; }
+  }
+  @media (max-width: 560px) {
+    .menu-grid, .reviews, form.book { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
+
 <header>
-  <div class="logo">Terra<span> Coffee</span></div>
+  <a href="#" class="logo">Terra <span>Coffee</span></a>
   <nav>
+    <a href="#o-nas">Nasza palarnia</a>
     <a href="#menu">Menu</a>
     <a href="#galeria">Galeria</a>
-    <a href="#kontakt">Kontakt</a>
+    <a href="#opinie">Opinie</a>
+    <a href="#rezerwacja" class="nav-cta">Zarezerwuj stolik</a>
   </nav>
 </header>
 
 <section class="hero">
-  <div>
-    <p class="eyebrow">Speciality coffee · est. 2026</p>
-    <h1>Kawa, która<br /><em>pachnie domem</em>.</h1>
-    <p>Palarnia, wypieki na miejscu i stolik przy oknie z widokiem na rynek. Wpadnij — pierwsze ciastko gratis.</p>
-    <a class="btn" href="#menu">Zobacz menu</a>
+  <img class="hero-bg" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80" alt="Wnętrze kawiarni Terra Coffee" />
+  <div class="hero-inner">
+    <p class="eyebrow">Speciality coffee · Kraków, Kazimierz</p>
+    <h1>Kawa palona małymi partiami.<br /><em>Podawana bez pośpiechu.</em></h1>
+    <p>Wypalamy ziarna z Etiopii, Kolumbii i Gwatemali w naszym piecu bębnowym trzy razy w tygodniu. Wpadnij na przelew, sernik baskijski i chwilę spokoju.</p>
+    <div class="hero-btns">
+      <a class="btn" href="#menu">Zobacz menu</a>
+      <a class="btn btn-ghost" href="#rezerwacja">Zarezerwuj stolik</a>
+    </div>
+  </div>
+</section>
+
+<section id="o-nas">
+  <div class="story">
+    <div class="story-imgs">
+      <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=700&q=80" alt="Świeżo palone ziarna kawy" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=700&q=80" alt="Przygotowywanie kawy" loading="lazy" />
+    </div>
+    <div>
+      <p class="eyebrow">Nasza historia</p>
+      <h2>Od mikro-palarni do ulubionego stolika przy oknie</h2>
+      <p>Zaczęliśmy w 2021 roku od 5-kilogramowego pieca i marzenia, żeby dobra kawa nie była snobistyczna. Dziś współpracujemy bezpośrednio z ośmioma farmami i codziennie rano pieczemy własne croissanty oraz sernik baskijski.</p>
+      <p>Każdą paczkę ziaren opisujemy datą wypału i profilem smakowym — możesz zabrać ją do domu i zmielimy ją pod Twoją kawiarkę, ekspres lub drip.</p>
+      <div class="stats">
+        <div><b>100%</b><span>Arabika Single Origin</span></div>
+        <div><b>48 h</b><span>Od wypału do młynka</span></div>
+        <div><b>8 farm</b><span>Direct trade</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section id="menu">
   <p class="eyebrow">Menu</p>
-  <h2>Nasze specjały</h2>
-  <div class="menu">
-    <div class="item"><div><div class="name">Espresso</div><div class="desc">Klasyczny shot z naszej palarni</div></div><div class="price">9 zł</div></div>
-    <div class="item"><div><div class="name">Flat White</div><div class="desc">Podwójne espresso, aksamitne mleko</div></div><div class="price">14 zł</div></div>
-    <div class="item"><div><div class="name">Pour Over V60</div><div class="desc">Kawa filtrowana, owoce i kwiaty</div></div><div class="price">17 zł</div></div>
-    <div class="item"><div><div class="name">Cold Brew Tonic</div><div class="desc">Orzeźwiający, na kostkach lodu</div></div><div class="price">16 zł</div></div>
-    <div class="item"><div><div class="name">Sernik baskijski</div><div class="desc">Karmelizowany, pieczony co rano</div></div><div class="price">15 zł</div></div>
-    <div class="item"><div><div class="name">Croissant maślany</div><div class="desc">72 warstwy ciasta, francuskie masło</div></div><div class="price">11 zł</div></div>
+  <h2>Co dziś parzymy i pieczemy</h2>
+  <p class="lead">Wszystkie kawy mleczne przygotowujemy też na napoju owsianym Oatly bez dopłaty.</p>
+
+  <div class="menu-tabs" id="menuTabs">
+    <button class="m-tab on" data-cat="all">Wszystko</button>
+    <button class="m-tab" data-cat="klasyki">Espresso &amp; Mleczne</button>
+    <button class="m-tab" data-cat="alternatywy">Przelewy &amp; Na zimno</button>
+    <button class="m-tab" data-cat="wypieki">Wypieki z naszego pieca</button>
   </div>
+
+  <div class="menu-grid" id="menuGrid"></div>
 </section>
 
 <section id="galeria">
   <p class="eyebrow">Galeria</p>
   <h2>Klimat Terry</h2>
-  <div class="gallery">
-    <div class="ph" style="--c1:#e9d9c6;--c2:#d4b896">☕</div>
-    <div class="ph" style="--c1:#d8c3ab;--c2:#b99972">🥐</div>
-    <div class="ph" style="--c1:#c9b193;--c2:#a9885f">🌿</div>
-    <div class="ph" style="--c1:#e4cfc0;--c2:#c9a587">🍰</div>
-    <div class="ph" style="--c1:#dbc4ac;--c2:#bd9a76">📖</div>
-    <div class="ph" style="--c1:#eadac8;--c2:#cfae8a">🪟</div>
-    <div class="ph" style="--c1:#d0b699;--c2:#b08a60">🫘</div>
-    <div class="ph" style="--c1:#e6d3be;--c2:#c4a179">🕯️</div>
+  <p class="lead">Kliknij dowolne zdjęcie, żeby powiększyć.</p>
+  <div class="gallery" id="gallery">
+    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=700&q=80" alt="Kawiarnia o poranku" loading="lazy" />
+    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=80" alt="Latte art" loading="lazy" />
+    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=700&q=80" alt="Stoliki w Terra Coffee" loading="lazy" />
+    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=700&q=80" alt="Bar kawowy" loading="lazy" />
+    <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=700&q=80" alt="Wnętrze kawiarni" loading="lazy" />
+    <img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=700&q=80" alt="Ekspres ciśnieniowy" loading="lazy" />
+    <img src="https://images.unsplash.com/photo-1517236837508-2b3fca41f2f9?auto=format&fit=crop&w=700&q=80" alt="Flat white" loading="lazy" />
+    <img src="https://images.unsplash.com/photo-1492683513054-55277abccd99?auto=format&fit=crop&w=700&q=80" alt="Domowe ciasto" loading="lazy" />
   </div>
 </section>
 
-<section id="kontakt">
-  <p class="eyebrow">Znajdziesz nas</p>
-  <h2>Wpadnij na kawę</h2>
-  <div class="info">
-    <div class="card"><h3>📍 Adres</h3><p>Rynek Główny 12<br />31-000 Kraków</p></div>
-    <div class="card"><h3>🕐 Godziny</h3><p>Pon–Pt: 7:30–19:00<br />Sob–Nd: 9:00–18:00</p></div>
-    <div class="card"><h3>✉️ Kontakt</h3><p>cześć@terracoffee.pl<br />+48 123 456 789</p></div>
+<section id="opinie">
+  <p class="eyebrow">Goście o nas</p>
+  <h2>4,9 ★ w Google (640+ opinii)</h2>
+  <div class="reviews">
+    <div class="rev">
+      <div class="stars">★★★★★</div>
+      <p>„Najlepszy przelew V60 w Krakowie. Barista poświęcił chwilę, żeby dobrać ziarna pod to, co lubię — wyszła Etiopia o smaku brzoskwini.”</p>
+      <b>Maja W.</b><span>Przewodnik Lokalny Google</span>
+    </div>
+    <div class="rev">
+      <div class="stars">★★★★★</div>
+      <p>„Sernik baskijski jeszcze ciepły o 9 rano i flat white na owsianym — mój stały piątkowy rytuał. Świetne miejsce też do pracy z laptopem.”</p>
+      <b>Tomek K.</b><span>Stały gość</span>
+    </div>
+    <div class="rev">
+      <div class="stars">★★★★★</div>
+      <p>„Kupuję tu ziarna do domu od pół roku. Zawsze świeży wypał i zawsze trafiają z rekomendacją.”</p>
+      <b>Aleksandra P.</b><span>Zweryfikowana opinia</span>
+    </div>
   </div>
 </section>
+
+<section id="rezerwacja">
+  <div class="book-wrap">
+    <div>
+      <p class="eyebrow">Odwiedź nas lub zarezerwuj</p>
+      <h2 style="font-family:Georgia,serif">Czekamy z młynkiem w gotowości</h2>
+      <div class="info-list">
+        <div><b>📍 Adres</b><span>ul. Józefa 18, Kazimierz · 31-056 Kraków</span></div>
+        <div><b>🕐 Godziny otwarcia</b><span>Pon–Pt: 7:30–20:00 · Sob–Nd: 8:30–20:00</span></div>
+        <div><b>📞 Telefon &amp; E-mail</b><span>+48 12 400 22 90 · czesc@terracoffee.pl</span></div>
+        <div><b>💻 Praca z laptopem</b><span>Szybkie Wi-Fi i gniazdka przy każdym stoliku pod ścianą</span></div>
+      </div>
+    </div>
+
+    <form class="book" id="bookForm">
+      <h3 class="full" style="font-size:18px;margin-bottom:4px">Rezerwacja stolika</h3>
+      <input type="text" required placeholder="Imię i nazwisko" />
+      <input type="tel" required placeholder="Telefon" />
+      <input type="date" required id="bookDate" />
+      <select required>
+        <option value="">Godzina…</option>
+        <option>09:00</option><option>10:30</option><option>12:00</option>
+        <option>14:00</option><option>16:00</option><option>17:30</option>
+      </select>
+      <select class="full">
+        <option>2 osoby — stolik przy oknie</option>
+        <option>4 osoby — duży stół dębowy</option>
+        <option>6+ osób — rezerwacja grupowa</option>
+      </select>
+      <textarea class="full" rows="3" placeholder="Uwagi (np. krzesełko dziecięce, stolik z gniazdkiem)…"></textarea>
+      <button type="submit" class="btn full">Potwierdź rezerwację</button>
+    </form>
+  </div>
+</section>
+
+<div class="lb" id="lb"><img id="lbImg" src="" alt="" /></div>
+<div class="toast" id="toast"></div>
 
 <footer>
-  <div class="logo">Terra<span style="color:var(--accent)"> Coffee</span></div>
-  Demonstracyjna strona kawiarni · HTML / CSS / JavaScript
+  <span class="logo">Terra <span style="color:var(--accent);font-style:italic">Coffee</span></span>
+  © 2026 Terra Coffee — projekt demonstracyjny w portfolio Adriana Pietrygi · HTML / CSS / JavaScript
 </footer>
+
+<script>
+  const dishes = [
+    {
+      name: "Podwójne Espresso",
+      price: "11 zł",
+      cat: "klasyki",
+      tag: "Bestseller · Brazylia Cerrado",
+      desc: "Gęsty, czekoladowo-orzechowy shot z niską kwasowością.",
+      img: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80"
+    },
+    {
+      name: "Flat White",
+      price: "16 zł",
+      cat: "klasyki",
+      tag: "Podwójny shot + aksamitne mleko",
+      desc: "Idealny balans między intensywnym espresso a kremową mikropianką.",
+      img: "https://images.unsplash.com/photo-1517236837508-2b3fca41f2f9?auto=format&fit=crop&w=700&q=80"
+    },
+    {
+      name: "Cappuccino Klasyczne",
+      price: "15 zł",
+      cat: "klasyki",
+      tag: "Mleko krowie lub Oatly",
+      desc: "Słodkie, puszyste mleko spienione do 62°C i wyraziste espresso.",
+      img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=80"
+    },
+    {
+      name: "Przelew V60 · Etiopia Guji",
+      price: "19 zł",
+      cat: "alternatywy",
+      tag: "Nuty: jaśmin, brzoskwinia",
+      desc: "Ręcznie parzony drip 300 ml z jasno palonych ziaren z regionu Guji.",
+      img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80"
+    },
+    {
+      name: "Cold Brew Tonic Pomarańcza",
+      price: "18 zł",
+      cat: "alternatywy",
+      tag: "18 h maceracji na zimno",
+      desc: "Orzeźwiające połączenie cold brew, rzemieślniczego toniku i skórki pomarańczy.",
+      img: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80"
+    },
+    {
+      name: "Rzemieślnicza Gorąca Czekolada",
+      price: "17 zł",
+      cat: "klasyki",
+      tag: "70% kakao z Ghany",
+      desc: "Prawdziwa tabliczkowa czekolada rozpuszczana na parze ze szczyptą soli morskiej.",
+      img: "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=700&q=80"
+    },
+    {
+      name: "Sernik Baskijski",
+      price: "18 zł",
+      cat: "wypieki",
+      tag: "Pieczony codziennie o 7:00",
+      desc: "Mocno skarmelizowany z zewnątrz, kremowy i niemal płynny w środku.",
+      img: "https://images.unsplash.com/photo-1492683513054-55277abccd99?auto=format&fit=crop&w=700&q=80"
+    },
+    {
+      name: "Cynamonka Kardamonowa",
+      price: "14 zł",
+      cat: "wypieki",
+      tag: "Szwecki przepis · ciepłe z pieca",
+      desc: "Drożdżowa bułeczka na maśle ze świeżo mielonym kardamonem i cynamonem.",
+      img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80"
+    },
+    {
+      name: "Ziarna do domu (250 g)",
+      price: "49 zł",
+      cat: "alternatywy",
+      tag: "Mielimy na życzenie",
+      desc: "Paczka świeżo palonej kawy — wybierz profil pod ekspres lub przelew.",
+      img: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=700&q=80"
+    },
+  ];
+
+  const grid = document.getElementById("menuGrid");
+  function renderMenu(cat = "all") {
+    grid.innerHTML = "";
+    dishes
+      .filter(d => cat === "all" || d.cat === cat)
+      .forEach(d => {
+        const el = document.createElement("article");
+        el.className = "dish";
+        el.innerHTML = `
+          <img src="${d.img}" alt="${d.name}" loading="lazy" />
+          <div class="dish-b">
+            <div class="dish-top"><h3>${d.name}</h3><span class="price">${d.price}</span></div>
+            <p>${d.desc}</p>
+            <span class="tag">${d.tag}</span>
+          </div>`;
+        grid.appendChild(el);
+      });
+  }
+
+  document.getElementById("menuTabs").addEventListener("click", e => {
+    const b = e.target.closest(".m-tab");
+    if (!b) return;
+    document.querySelectorAll(".m-tab").forEach(x => x.classList.remove("on"));
+    b.classList.add("on");
+    renderMenu(b.dataset.cat);
+  });
+
+  // Lightbox
+  const lb = document.getElementById("lb");
+  const lbImg = document.getElementById("lbImg");
+  document.getElementById("gallery").addEventListener("click", e => {
+    const img = e.target.closest("img");
+    if (!img) return;
+    lbImg.src = img.src;
+    lb.classList.add("open");
+  });
+  lb.addEventListener("click", () => lb.classList.remove("open"));
+
+  // Booking
+  document.getElementById("bookDate").valueAsDate = new Date();
+  document.getElementById("bookForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const t = document.getElementById("toast");
+    t.textContent = "Stolik zarezerwowany! Potwierdzenie wysłaliśmy SMS-em ☕";
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 2600);
+    e.target.reset();
+    document.getElementById("bookDate").valueAsDate = new Date();
+  });
+
+  renderMenu();
+</script>
 </body>
 </html>
